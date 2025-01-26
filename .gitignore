@@ -1,0 +1,60 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency directories
+node_modules/
+.DS_Store
+
+# Environment variables
+.env
+.env.*
+
+# Build files
+/dist
+/build
+
+# Vite cache
+/.vite
+/.cache
+/.temp
+
+# Public folder content (if dynamically generated)
+public/assets/
+public/*.cache
+
+# Tailwind
+tailwind.config.js
+
+# Ignore package-lock and yarn.lock if needed
+package-lock.json
+yarn.lock
+
+# Ignore IDE or editor config files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Ignore generated files
+*.out
+*.class
+*.pyc
+*.pyo
+*.exe
+*.dll
+*.pdb
+*.obj
+
+# Ignore backup files
+*.bak
+*.tmp
+
+# Ignore git-related files
+*.orig
