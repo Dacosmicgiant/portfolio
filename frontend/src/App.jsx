@@ -48,7 +48,6 @@ const App = () => {
         {/* <Route path="/projects:[id]" element={<HomePage />} /> */}
    
       </Routes>
-
       <Footer />
 
       <Toaster />
