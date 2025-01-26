@@ -1,14 +1,34 @@
+import Navbar from "./components/Navbar";
+
+import HomePage from "./pages/HomePage";
+import SignUpPage from "./pages/SignUpPage";
+import LoginPage from "./pages/LoginPage";
+import ProjectsPage from "./pages/ProjectsPage"
+
+import {Routes, Route} from "react-router-dom";
+import { useAuthStore } from "./store/useAuthStore";
+import { useEffect } from "react";
+
 const App = () => {
+  const {authUser, checkAuth} = useAuthStore()
+
+  useEffect(() => {
+    checkAuth();
+  }, [checkAuth]);
+
+  console.log({authUser});
   return (
     <div>
-      Hello World
-      <button className="btn">Button</button>
-<button className="btn btn-neutral">Neutral</button>
-<button className="btn btn-primary">Primary</button>
-<button className="btn btn-secondary">Secondary</button>
-<button className="btn btn-accent">Accent</button>
-<button className="btn btn-ghost">Ghost</button>
-<button className="btn btn-link">Link</button>
+      <Navbar />
+
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/projects" element={<ProjectsPage />} />
+        {/* <Route path="/projects:[id]" element={<HomePage />} /> */}
+   
+      </Routes>
     </div>
   )
 };
