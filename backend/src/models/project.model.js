@@ -5,27 +5,45 @@ const projectSchema = new mongoose.Schema(
   {
     title: {
       type: String,
-      required: true,
+      required: [true, "Project title is required"],
       trim: true,
     },
     description: {
       type: String,
-      required: true,
+      required: [true, "Project description is required"],
+      trim: true,
     },
     technologies: {
       type: [String],
-      required: true,
+      required: [true, "At least one technology must be specified"],
     },
-    image: {
+    imageUrl: {
       type: String,
-      required: false, // Optional: URL for the project image
+      required: [true, "Project image URL is required"],
     },
-    links: {
-      demo: { type: String, required: false }, // Demo link
-      code: { type: String, required: false }, // GitHub or repository link
+    githubUrl: {
+      type: String,
+      required: [true, "GitHub repository URL is required"],
+      trim: true,
     },
+    deploymentUrl: {
+      type: String,
+      required: [true, "Deployment URL is required"],
+      trim: true,
+    },
+    featured: {
+      type: Boolean,
+      default: false,
+    },
+    status: {
+      type: String,
+      enum: ["completed", "in-progress", "planned"],
+      default: "completed",
+    }
   },
-  { timestamps: true } // To automatically store created and updated dates
+  { 
+    timestamps: true 
+  }
 );
 
 const Project = mongoose.model("Project", projectSchema);
