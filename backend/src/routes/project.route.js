@@ -1,7 +1,7 @@
 // project.route.js
 
 import express from "express";
-import { addProject, getProjects, getProjectById } from "../controllers/project.controller.js";
+import { addProject, getProjects, getProjectById, getFeaturedProjects } from "../controllers/project.controller.js";
 import { protectAdminRoute } from "../middleware/auth.middleware.js";
 import { updateProject, deleteProject } from "../controllers/project.controller.js";
 import { upload } from "../middleware/multer.middleware.js";
@@ -23,6 +23,9 @@ router.post("/", protectAdminRoute, (req, res, next) => {
 
 // Get all projects
 router.get("/", getProjects);
+
+// Get featured projects
+router.get("/featured", getFeaturedProjects);
 
 // Get project by ID
 router.get("/:projectId", getProjectById);

@@ -216,6 +216,22 @@ export const updateProject = async (req, res) => {
     }
   };
 
+// Get featured projects
+export const getFeaturedProjects = async (req, res) => {
+  try {
+    console.log("Starting getFeaturedProjects...");
+    const projects = await Project.find({ featured: true });
+    console.log("Featured projects retrieved successfully:", projects.length);
+    res.status(200).json(projects);
+  } catch (error) {
+    console.error("Error in getFeaturedProjects:", error);
+    res.status(500).json({ 
+      message: "Internal Server Error",
+      error: error.message
+    });
+  }
+};
+
 // Delete a project by ID
 export const deleteProject = async (req, res) => {
     const { projectId } = req.params;
