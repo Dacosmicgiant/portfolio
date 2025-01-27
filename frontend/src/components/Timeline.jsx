@@ -3,28 +3,46 @@ import React from 'react';
 const Timeline = () => {
   const timelineEvents = [
     {
+      year: "2024",
+      title: "IBM certified Full-Stack Software Developer Professional",
+      description: "Validates expertise in building and deploying full-stack applications using modern technologies, including frontend, backend, cloud, and DevOps tools.",
+      category: "Certification"
+    },
+    {
       year: "2023",
-      title: "Senior Developer",
-      description: "Led development of AI-integrated web applications",
+      title: "Web Development Intern - Prodigy InfoTech",
+      description: "1 month internship",
       category: "Work"
     },
     {
-      year: "2022",
-      title: "Full Stack Developer",
-      description: "Developed scalable web solutions using MERN stack",
-      category: "Work"
+      year: "2023",
+      title: "Code Innovact Hackathon Winner",
+      description: "Won 1st Rank for EdTech Domain",
+      category: "Achievement"
     },
     {
-      year: "2021",
-      title: "Bachelor's in Computer Science",
-      description: "Graduated with honors, specialized in AI and Web Development",
+      year: "2022 - present",
+      title: "Pillai College of Engineering",
+      description: "B.Tech - Information Technology",
       category: "Education"
     },
     {
-      year: "2020",
-      title: "Tech Innovation Award",
-      description: "Recognized for innovative solutions in web development",
-      category: "Achievement"
+      year: "2020-2022",
+      title: "St. Mary's Jr. College",
+      description: "Higher Secondary School",
+      category: "Education"
+    },
+    {
+      year: "2019",
+      title: "Inter-School Science Expo Winner",
+      description: "Won 1st rank for a robotic vaccum cleaner project",
+      category: "Acheivement"
+    },
+    {
+      year: "2008 - 2020",
+      title: "Seventh-Day Adventist",
+      description: "Middle school and high school",
+      category: "Education"
     }
   ];
 

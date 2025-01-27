@@ -4,28 +4,31 @@ import { Link } from 'react-router-dom';
 import About from '../components/About';
 import Timeline from '../components/Timeline';
 import heroImage from "../assets/hero.png";
+import chatImage from "../assets/images/chit-chat.png";
+import focusImage from "../assets/images/focus-flow.png";
+import priorityImage from "../assets/images/priority-pal.png";
 
 const HomePage = () => {
   const projects = [
     {
       id: 1,
-      title: "Project 1",
-      description: "Description of project 1",
-      image: "https://placehold.co/600x400",
+      title: "Chit-Chat",
+      description: "Real-Time Chat Application",
+      image: chatImage,
       link: "/projects/1"
     },
     {
       id: 2,
-      title: "Project 2",
-      description: "Description of project 2",
-      image: "https://placehold.co/600x400",
+      title: "Focus-Flow",
+      description: "An intelligent study assistant",
+      image: focusImage,
       link: "/projects/2"
     },
     {
       id: 3,
-      title: "Project 3",
-      description: "Description of project 3",
-      image: "https://placehold.co/600x400",
+      title: "Priority-Pal",
+      description: "AI-powered scheduling that adapts to you",
+      image: priorityImage,
       link: "/projects/3"
     }
   ];
@@ -61,7 +64,7 @@ const HomePage = () => {
         </div>
       </div>
 
-      {/* Featured Projects */}
+      {/* Featured Projects
       <div className="py-20 bg-base-100">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl font-bold mb-10 text-center">Featured Projects</h2>
@@ -77,7 +80,37 @@ const HomePage = () => {
             ))}
           </div>
         </div>
-      </div>
+      </div> */}
+
+      {/* Featured Projects */}
+<div className="py-20 bg-base-100">
+  <div className="container mx-auto px-4">
+    <h2 className="text-4xl font-bold mb-10 text-center">Featured Projects</h2>
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {projects.map((project) => (
+        <Link
+          to={project.link}
+          key={project.id}
+          className="card bg-base-200 shadow-xl hover:shadow-2xl transition-all"
+        >
+          {/* Ensure images are resized uniformly */}
+          <figure className="w-full h-48 flex items-center justify-center bg-black">
+            <img
+              src={project.image}
+              alt={project.title}
+              className="object-contain w-full h-full"
+            />
+          </figure>
+          <div className="card-body">
+            <h3 className="card-title text-2xl">{project.title}</h3>
+            <p className="text-lg">{project.description}</p>
+          </div>
+        </Link>
+      ))}
+    </div>
+  </div>
+</div>
+
 
       {/* About Section */}
       <About />

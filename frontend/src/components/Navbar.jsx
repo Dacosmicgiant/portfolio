@@ -12,7 +12,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-full">
           <div className="flex items-center gap-8">
             <Link to="/" className="flex items-center gap-2.5 hover:opacity-80 transition-all">
-              <h1 className="text-lg font-bold">COSMIC</h1>
+              <h1 className="text-lg font-bold">Dacosmicgiant</h1>
             </Link>
           </div>
 
