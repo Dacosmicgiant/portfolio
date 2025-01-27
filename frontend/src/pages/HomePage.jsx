@@ -1,151 +1,91 @@
-import React from 'react'
+import React from 'react';
+import { FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import About from '../components/About';
+import Timeline from '../components/Timeline';
+import heroImage from "../assets/hero.png";
 
 const HomePage = () => {
+  const projects = [
+    {
+      id: 1,
+      title: "Project 1",
+      description: "Description of project 1",
+      image: "https://placehold.co/600x400",
+      link: "/projects/1"
+    },
+    {
+      id: 2,
+      title: "Project 2",
+      description: "Description of project 2",
+      image: "https://placehold.co/600x400",
+      link: "/projects/2"
+    },
+    {
+      id: 3,
+      title: "Project 3",
+      description: "Description of project 3",
+      image: "https://placehold.co/600x400",
+      link: "/projects/3"
+    }
+  ];
+
   return (
-    <div>
-
-        <div className="hero bg-base-200 min-h-screen">
+    <div className="pt-16">
+      {/* Hero Section */}
+      <div className="hero min-h-screen bg-base-200">
         <div className="hero-content flex-col lg:flex-row-reverse">
-            <img
-            src="https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.webp"
-            className="max-w-sm rounded-lg shadow-2xl" />
-            <div>
-            <h1 className="text-5xl font-bold">Box Office News!</h1>
+          <img
+            src={heroImage}
+            className="max-w-sm rounded-lg shadow-2xl"
+            alt="Vedant Vankar"
+          />
+          <div>
+            <h1 className="text-5xl font-bold">Hello, I'm Vedant Vankar.</h1>
+            <h2 className="text-2xl mt-4">MERN stack + AI-Integrated Application Developer</h2>
             <p className="py-6">
-                Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
-                quasi. In deleniti eaque aut repudiandae et a id nisi.
+              A passionate developer focused on creating innovative solutions using cutting-edge technologies.
             </p>
-            <button className="btn btn-primary">Get Started</button>
+            <div className="flex gap-4">
+              <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" className="btn btn-circle btn-outline">
+                <FaGithub className="text-xl" />
+              </a>
+              <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" className="btn btn-circle btn-outline">
+                <FaLinkedin className="text-xl" />
+              </a>
+              <a href="https://instagram.com/yourusername" target="_blank" rel="noopener noreferrer" className="btn btn-circle btn-outline">
+                <FaInstagram className="text-xl" />
+              </a>
             </div>
+          </div>
         </div>
+      </div>
+
+      {/* Featured Projects */}
+      <div className="py-20 bg-base-100">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl font-bold mb-10 text-center">Featured Projects</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {projects.map((project) => (
+              <Link to={project.link} key={project.id} className="card bg-base-200 shadow-xl hover:shadow-2xl transition-all">
+                <figure><img src={project.image} alt={project.title} /></figure>
+                <div className="card-body">
+                  <h3 className="card-title text-2xl">{project.title}</h3>
+                  <p className="text-lg">{project.description}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
+      </div>
 
-    
+      {/* About Section */}
+      <About />
 
-                <ul className="timeline timeline-snap-icon max-md:timeline-compact timeline-vertical">
-        <li>
-            <div className="timeline-middle">
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                className="h-5 w-5">
-                <path
-                fillRule="evenodd"
-                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
-                clipRule="evenodd" />
-            </svg>
-            </div>
-            <div className="timeline-start mb-10 md:text-end">
-            <time className="font-mono italic">1984</time>
-            <div className="text-lg font-black">First Macintosh computer</div>
-            The Apple Macintosh—later rebranded as the Macintosh 128K—is the original Apple Macintosh
-            personal computer. It played a pivotal role in establishing desktop publishing as a general
-            office function. The motherboard, a 9 in (23 cm) CRT monitor, and a floppy drive were housed
-            in a beige case with integrated carrying handle; it came with a keyboard and single-button
-            mouse.
-            </div>
-            <hr />
-        </li>
-        <li>
-            <hr />
-            <div className="timeline-middle">
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                className="h-5 w-5">
-                <path
-                fillRule="evenodd"
-                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
-                clipRule="evenodd" />
-            </svg>
-            </div>
-            <div className="timeline-end md:mb-10">
-            <time className="font-mono italic">1998</time>
-            <div className="text-lg font-black">iMac</div>
-            iMac is a family of all-in-one Mac desktop computers designed and built by Apple Inc. It has
-            been the primary part of Apple's consumer desktop offerings since its debut in August 1998,
-            and has evolved through seven distinct forms
-            </div>
-            <hr />
-        </li>
-        <li>
-            <hr />
-            <div className="timeline-middle">
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                className="h-5 w-5">
-                <path
-                fillRule="evenodd"
-                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
-                clipRule="evenodd" />
-            </svg>
-            </div>
-            <div className="timeline-start mb-10 md:text-end">
-            <time className="font-mono italic">2001</time>
-            <div className="text-lg font-black">iPod</div>
-            The iPod is a discontinued series of portable media players and multi-purpose mobile devices
-            designed and marketed by Apple Inc. The first version was released on October 23, 2001, about
-            8+1⁄2 months after the Macintosh version of iTunes was released. Apple sold an estimated 450
-            million iPod products as of 2022. Apple discontinued the iPod product line on May 10, 2022. At
-            over 20 years, the iPod brand is the oldest to be discontinued by Apple
-            </div>
-            <hr />
-        </li>
-        <li>
-            <hr />
-            <div className="timeline-middle">
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                className="h-5 w-5">
-                <path
-                fillRule="evenodd"
-                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
-                clipRule="evenodd" />
-            </svg>
-            </div>
-            <div className="timeline-end md:mb-10">
-            <time className="font-mono italic">2007</time>
-            <div className="text-lg font-black">iPhone</div>
-            iPhone is a line of smartphones produced by Apple Inc. that use Apple's own iOS mobile
-            operating system. The first-generation iPhone was announced by then-Apple CEO Steve Jobs on
-            January 9, 2007. Since then, Apple has annually released new iPhone models and iOS updates. As
-            of November 1, 2018, more than 2.2 billion iPhones had been sold. As of 2022, the iPhone
-            accounts for 15.6% of global smartphone market share
-            </div>
-            <hr />
-        </li>
-        <li>
-            <hr />
-            <div className="timeline-middle">
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                className="h-5 w-5">
-                <path
-                fillRule="evenodd"
-                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
-                clipRule="evenodd" />
-            </svg>
-            </div>
-            <div className="timeline-start mb-10 md:text-end">
-            <time className="font-mono italic">2015</time>
-            <div className="text-lg font-black">Apple Watch</div>
-            The Apple Watch is a line of smartwatches produced by Apple Inc. It incorporates fitness
-            tracking, health-oriented capabilities, and wireless telecommunication, and integrates with
-            iOS and other Apple products and services
-            </div>
-        </li>
-        </ul>
-
+      {/* Timeline Section */}
+      <Timeline />
     </div>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;

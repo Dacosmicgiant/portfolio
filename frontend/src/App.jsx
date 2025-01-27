@@ -6,6 +6,7 @@ import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
 import ProjectsPage from "./pages/ProjectsPage";
 import ThemePage from "./pages/ThemePage";
+import ContactPage from "./pages/ContactPage";
 
 import {Routes, Route, Navigate} from "react-router-dom";
 import { useAuthStore } from "./store/useAuthStore";
@@ -15,8 +16,6 @@ import { useEffect } from "react";
 import { Loader } from "lucide-react";
 import { Toaster } from "react-hot-toast";
 
-
-
 const App = () => {
   const {authUser, checkAuth, isCheckingAuth} = useAuthStore()
   const {theme} = useThemeStore()
@@ -24,8 +23,6 @@ const App = () => {
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);
-
-  console.log({authUser});
 
   if (isCheckingAuth && !authUser)
     return (
@@ -41,18 +38,20 @@ const App = () => {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/signup" element={!authUser ? <SignUpPage /> : <Navigate to="/" />} />
-
         <Route path="/login" element={!authUser ? <LoginPage /> : <Navigate to="/" />} />
-        <Route path="/projects" element={authUser ? <ProjectsPage /> : <Navigate to="/login"/>} />
-        <Route path="/theme" element={<ThemePage />} />
-        {/* <Route path="/projects:[id]" element={<HomePage />} /> */}
-   
-      </Routes>
-      <Footer />
+        <Route path="/projects" element={authUser ? <ProjectsPage /> : <Navigate to="/login" />} />
+        <Route path="/projects/:id" element={<ProjectsPage />} />
+        <Route path="/theme" element={authUser ? <ThemePage /> : <Navigate to="/login" />} />
+        <Route path="/contact" element={authUser ? <ContactPage /> : <Navigate to="/login" />} />
 
-      <Toaster />
+        {/* <Route path='projects' element={<Projects/ >}> </Route> */}
+        
+        </Routes>
+
+      <Footer />
+      <Toaster position="top-right" />
     </div>
-  )
+  );
 };
 
 export default App
