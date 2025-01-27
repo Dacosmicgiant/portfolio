@@ -29,3 +29,26 @@ export const protectRoute = async (req, res, next) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
+
+export const protectAdminRoute = async (req, res, next) => {
+  try {
+    const token = req.cookies.jwt;
+
+    if (!token) {
+      return res.status(401).json({ message: "Unauthorized - No Token Provided" });
+    }
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await User.findById(decoded.userId).select("-password");
+
+    if (!user || !user.isAdmin) {
+      return res.status(403).json({ message: "Access denied - Admin only" });
+    }
+
+    req.user = user;
+    next();
+  } catch (error) {
+    console.log("Error in protectAdminRoute middleware:", error.message);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
