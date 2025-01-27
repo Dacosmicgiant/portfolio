@@ -1,3 +1,5 @@
+// seedAdmin.js
+
 import dotenv from "dotenv";
 import bcrypt from "bcryptjs";
 import mongoose from "mongoose";

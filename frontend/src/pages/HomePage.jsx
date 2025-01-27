@@ -1,3 +1,5 @@
+// HomePage.jsx
+
 import React from 'react';
 import { FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
@@ -64,25 +66,6 @@ const HomePage = () => {
         </div>
       </div>
 
-      {/* Featured Projects
-      <div className="py-20 bg-base-100">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold mb-10 text-center">Featured Projects</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {projects.map((project) => (
-              <Link to={project.link} key={project.id} className="card bg-base-200 shadow-xl hover:shadow-2xl transition-all">
-                <figure><img src={project.image} alt={project.title} /></figure>
-                <div className="card-body">
-                  <h3 className="card-title text-2xl">{project.title}</h3>
-                  <p className="text-lg">{project.description}</p>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </div> */}
-
-      {/* Featured Projects */}
 <div className="py-20 bg-base-100">
   <div className="container mx-auto px-4">
     <h2 className="text-4xl font-bold mb-10 text-center">Featured Projects</h2>
