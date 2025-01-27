@@ -1,3 +1,5 @@
+// index.js
+
 // const express = require("express")
 import express from "express";
 import dotenv from "dotenv";
@@ -8,7 +10,7 @@ import {connectDB} from "./lib/db.js";
 
 import authRoutes from "./routes/auth.route.js";
 import messageRoutes from "./routes/message.route.js";
-import projectRoutes from "./routes/project.routes.js";
+import projectRoutes from "./routes/project.route.js";
 
 dotenv.config()
 const app = express();
