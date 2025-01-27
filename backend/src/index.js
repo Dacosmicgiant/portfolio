@@ -9,7 +9,6 @@ import cors from "cors";
 import {connectDB} from "./lib/db.js";
 
 import authRoutes from "./routes/auth.route.js";
-import messageRoutes from "./routes/message.route.js";
 import projectRoutes from "./routes/project.route.js";
 
 dotenv.config()
@@ -26,7 +25,6 @@ app.use(cors({
 ))
 
 app.use("/api/auth", authRoutes)
-app.use("/api/message", messageRoutes)
 app.use("/api/projects", projectRoutes);
 
 app.listen(PORT, () => {
