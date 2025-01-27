@@ -50,3 +50,46 @@ export const getProjectById = async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
+
+// Update a project by ID
+export const updateProject = async (req, res) => {
+    const { projectId } = req.params;
+    const { title, description, technologies, image, links } = req.body;
+  
+    try {
+      const updatedProject = await Project.findByIdAndUpdate(
+        projectId,
+        { title, description, technologies, image, links },
+        { new: true } // Returns the updated project
+      );
+  
+      if (!updatedProject) {
+        return res.status(404).json({ message: "Project not found" });
+      }
+  
+      res.status(200).json({ message: "Project updated successfully", project: updatedProject });
+    } catch (error) {
+      console.log("Error in updateProject:", error.message);
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+  };
+
+// Delete a project by ID
+export const deleteProject = async (req, res) => {
+    const { projectId } = req.params;
+  
+    try {
+      const deletedProject = await Project.findByIdAndDelete(projectId);
+  
+      if (!deletedProject) {
+        return res.status(404).json({ message: "Project not found" });
+      }
+  
+      res.status(200).json({ message: "Project deleted successfully" });
+    } catch (error) {
+      console.log("Error in deleteProject:", error.message);
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+  };
+  
+  
