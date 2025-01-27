@@ -1,37 +1,32 @@
-import React from 'react';
+// HomePage.jsx
+
+import React, { useState, useEffect } from 'react';
 import { FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { Loader } from 'lucide-react';
+import { axiosInstance } from '../lib/axios';
 import About from '../components/About';
 import Timeline from '../components/Timeline';
 import heroImage from "../assets/hero.png";
-import chatImage from "../assets/images/chit-chat.png";
-import focusImage from "../assets/images/focus-flow.png";
-import priorityImage from "../assets/images/priority-pal.png";
 
 const HomePage = () => {
-  const projects = [
-    {
-      id: 1,
-      title: "Chit-Chat",
-      description: "Real-Time Chat Application",
-      image: chatImage,
-      link: "/projects/1"
-    },
-    {
-      id: 2,
-      title: "Focus-Flow",
-      description: "An intelligent study assistant",
-      image: focusImage,
-      link: "/projects/2"
-    },
-    {
-      id: 3,
-      title: "Priority-Pal",
-      description: "AI-powered scheduling that adapts to you",
-      image: priorityImage,
-      link: "/projects/3"
-    }
-  ];
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchFeaturedProjects = async () => {
+      try {
+        const response = await axiosInstance.get('/projects/featured');
+        console.log("Featured projects:", response.data);
+        setProjects(response.data);
+      } catch (error) {
+        console.error("Error fetching featured projects:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchFeaturedProjects();
+  }, []);
 
   return (
     <div className="pt-16">
@@ -64,53 +59,58 @@ const HomePage = () => {
         </div>
       </div>
 
-      {/* Featured Projects
+      {/* Featured Projects Section */}
       <div className="py-20 bg-base-100">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl font-bold mb-10 text-center">Featured Projects</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {projects.map((project) => (
-              <Link to={project.link} key={project.id} className="card bg-base-200 shadow-xl hover:shadow-2xl transition-all">
-                <figure><img src={project.image} alt={project.title} /></figure>
-                <div className="card-body">
-                  <h3 className="card-title text-2xl">{project.title}</h3>
-                  <p className="text-lg">{project.description}</p>
-                </div>
-              </Link>
-            ))}
-          </div>
+          {loading ? (
+            <div className="flex justify-center items-center min-h-[200px]">
+              <Loader className="animate-spin size-10" />
+            </div>
+          ) : projects.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {projects.map((project) => (
+                <Link
+                  to={`/projects/${project._id}`}
+                  key={project._id}
+                  className="card bg-base-200 shadow-xl hover:shadow-2xl transition-all hover:scale-105 duration-300"
+                >
+                  <figure className="relative pt-[60%] overflow-hidden">
+                    <img
+                      src={project.imageUrl}
+                      alt={project.title}
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
+                  </figure>
+                  <div className="card-body">
+                    <h3 className="card-title text-2xl">{project.title}</h3>
+                    <p className="text-base-content/70">{project.description}</p>
+                    <div className="flex flex-wrap gap-2 mt-2">
+                      {project.technologies.slice(0, 3).map((tech, index) => (
+                        <span
+                          key={index}
+                          className="badge badge-primary badge-sm"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                      {project.technologies.length > 3 && (
+                        <span className="badge badge-ghost badge-sm">
+                          +{project.technologies.length - 3} more
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center text-lg text-base-content/70">
+              No featured projects available yet.
+            </div>
+          )}
         </div>
-      </div> */}
-
-      {/* Featured Projects */}
-<div className="py-20 bg-base-100">
-  <div className="container mx-auto px-4">
-    <h2 className="text-4xl font-bold mb-10 text-center">Featured Projects</h2>
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-      {projects.map((project) => (
-        <Link
-          to={project.link}
-          key={project.id}
-          className="card bg-base-200 shadow-xl hover:shadow-2xl transition-all"
-        >
-          {/* Ensure images are resized uniformly */}
-          <figure className="w-full h-48 flex items-center justify-center bg-black">
-            <img
-              src={project.image}
-              alt={project.title}
-              className="object-contain w-full h-full"
-            />
-          </figure>
-          <div className="card-body">
-            <h3 className="card-title text-2xl">{project.title}</h3>
-            <p className="text-lg">{project.description}</p>
-          </div>
-        </Link>
-      ))}
-    </div>
-  </div>
-</div>
-
+      </div>
 
       {/* About Section */}
       <About />
