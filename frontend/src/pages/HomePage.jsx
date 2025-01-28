@@ -20,7 +20,7 @@ const HomePage = () => {
   useEffect(() => {
     const fetchFeaturedProjects = async () => {
       try {
-        const response = await axiosInstance.get('/projects/featured');
+        const response = await axiosInstance.get('/api/projects/featured');
         console.log("Featured projects:", response.data);
         setProjects(response.data);
       } catch (error) {

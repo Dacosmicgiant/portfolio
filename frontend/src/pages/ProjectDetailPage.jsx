@@ -11,7 +11,7 @@ const ProjectDetailPage = () => {
   useEffect(() => {
     const fetchProject = async () => {
       try {
-        const response = await axiosInstance.get(`/projects/${id}`);
+        const response = await axiosInstance.get(`/api/projects/${id}`);
         console.log("Project data:", response.data);
         setProject(response.data);
       } catch (error) {

@@ -25,7 +25,7 @@ const ContactPage = () => {
     setLoading(true);
 
     try {
-      const response = await axiosInstance.post("/messages", formData);
+      const response = await axiosInstance.post("/api/messages", formData);
       console.log("Message sent:", response.data);
       toast.success("Message sent successfully!");
       

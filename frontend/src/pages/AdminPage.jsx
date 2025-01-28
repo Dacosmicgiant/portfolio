@@ -19,8 +19,8 @@ const AdminPage = () => {
     try {
       setLoading(true);
       const [projectsRes, messagesRes] = await Promise.all([
-        axiosInstance.get("/projects"),
-        axiosInstance.get("/messages"),
+        axiosInstance.get("/api/projects"),
+        axiosInstance.get("/api/messages"),
       ]);
       setProjects(projectsRes.data);
       setMessages(messagesRes.data);
@@ -36,7 +36,7 @@ const AdminPage = () => {
     if (!window.confirm("Are you sure you want to delete this project?")) return;
 
     try {
-      await axiosInstance.delete(`/projects/${projectId}`);
+      await axiosInstance.delete(`/api/projects/${projectId}`);
       toast.success("Project deleted successfully");
       fetchData();
     } catch (error) {
@@ -47,7 +47,7 @@ const AdminPage = () => {
 
   const handleUpdateMessageStatus = async (messageId, status) => {
     try {
-      await axiosInstance.patch(`/messages/${messageId}/status`, { status });
+      await axiosInstance.patch(`/api/messages/${messageId}/status`, { status });
       toast.success("Message status updated");
       fetchData();
     } catch (error) {
@@ -60,7 +60,7 @@ const AdminPage = () => {
     if (!window.confirm("Are you sure you want to delete this message?")) return;
 
     try {
-      await axiosInstance.delete(`/messages/${messageId}`);
+      await axiosInstance.delete(`/api/messages/${messageId}`);
       toast.success("Message deleted successfully");
       fetchData();
     } catch (error) {

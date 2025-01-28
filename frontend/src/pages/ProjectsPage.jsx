@@ -11,7 +11,7 @@ const ProjectsPage = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await axiosInstance.get("/projects");
+        const response = await axiosInstance.get("/api/projects");
         console.log("Projects data:", response.data); // Debug log
         setProjects(response.data);
       } catch (error) {

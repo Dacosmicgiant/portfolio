@@ -73,7 +73,7 @@ const AddProjectModal = ({ isOpen, onClose, onSuccess }) => {
         formDataToSend.append("image", selectedImage);
       }
 
-      await axiosInstance.post("/projects", formDataToSend, {
+      await axiosInstance.post("/api/projects", formDataToSend, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
