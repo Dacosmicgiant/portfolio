@@ -4,23 +4,27 @@ import React from "react";
 import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaNodeJs, FaPython } from "react-icons/fa";
 import { SiMongodb, SiExpress, SiFlask, SiVite } from "react-icons/si";
 import aboutImage from "../assets/images/aboutme.png"
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const About = () => {
+  const leftColumnRef = useScrollAnimation();
+  const rightColumnRef = useScrollAnimation();
+
   return (
     <div className="py-20 bg-base-100">
       <div className="container mx-auto px-4">
         <div className="card bg-base-200 shadow-xl">
           <div className="card-body">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div>
-                <h3 className="text-2xl font-semibold mb-4">Who I Am</h3>
+              <div ref={leftColumnRef} className="opacity-0">
+                <h3 className="text-2xl font-semibold mb-4">Who Am I?</h3>
                 <p className="text-lg mb-6">
                   I'm a passionate MERN stack developer with a keen interest in
                   AI integration. With a strong foundation in both frontend and
                   backend development, I create seamless, user-centric
                   applications that solve real-world problems.
                 </p>
-                <h3 className="text-2xl font-semibold mb-4">What I Do</h3>
+                <h3 className="text-2xl font-semibold mb-4">What Do I Do?</h3>
                 <ul className="list-disc list-inside space-y-2 text-lg">
                   <li>Full-stack Web Development</li>
                   <li>AI Integration</li>
@@ -29,7 +33,7 @@ const About = () => {
                   <li>API Development</li>
                 </ul>
               </div>
-              <div className="flex items-center justify-center">
+              <div ref={rightColumnRef} className="opacity-0 flex items-center justify-center">
                 <img
                   src={aboutImage}
                   alt="Dynamic Representation"

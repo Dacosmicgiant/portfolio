@@ -107,16 +107,16 @@ const AddProjectModal = ({ isOpen, onClose, onSuccess }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-base-100 rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-        <div className="sticky top-0 bg-base-100 p-4 border-b border-base-300 flex justify-between items-center">
-          <h2 className="text-2xl font-bold">Add New Project</h2>
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-2 sm:p-4">
+      <div className="bg-base-100 rounded-lg w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+        <div className="sticky top-0 bg-base-100 p-3 sm:p-4 border-b border-base-300 flex justify-between items-center z-10">
+          <h2 className="text-xl sm:text-2xl font-bold">Add New Project</h2>
           <button onClick={onClose} className="btn btn-ghost btn-sm">
             <X size={20} />
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-4 space-y-4">
+        <form onSubmit={handleSubmit} className="p-3 sm:p-4 space-y-4">
           <div className="form-control">
             <label className="label">
               <span className="label-text">Title</span>
@@ -127,7 +127,7 @@ const AddProjectModal = ({ isOpen, onClose, onSuccess }) => {
               value={formData.title}
               onChange={handleChange}
               placeholder="Project title"
-              className="input input-bordered"
+              className="input input-bordered w-full"
               required
             />
           </div>
@@ -154,7 +154,7 @@ const AddProjectModal = ({ isOpen, onClose, onSuccess }) => {
               type="file"
               accept="image/*"
               onChange={handleImageChange}
-              className="file-input file-input-bordered w-full"
+              className="file-input file-input-bordered w-full text-sm sm:text-base"
               required
             />
             {imagePreview && (
@@ -162,40 +162,42 @@ const AddProjectModal = ({ isOpen, onClose, onSuccess }) => {
                 <img
                   src={imagePreview}
                   alt="Preview"
-                  className="w-full h-48 object-cover rounded-lg"
+                  className="w-full h-40 sm:h-48 object-cover rounded-lg"
                 />
               </div>
             )}
           </div>
 
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">GitHub URL</span>
-            </label>
-            <input
-              type="url"
-              name="githubUrl"
-              value={formData.githubUrl}
-              onChange={handleChange}
-              placeholder="https://github.com/username/project"
-              className="input input-bordered"
-              required
-            />
-          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">GitHub URL</span>
+              </label>
+              <input
+                type="url"
+                name="githubUrl"
+                value={formData.githubUrl}
+                onChange={handleChange}
+                placeholder="https://github.com/..."
+                className="input input-bordered w-full"
+                required
+              />
+            </div>
 
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Deployment URL</span>
-            </label>
-            <input
-              type="url"
-              name="deploymentUrl"
-              value={formData.deploymentUrl}
-              onChange={handleChange}
-              placeholder="https://your-project.com"
-              className="input input-bordered"
-              required
-            />
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Deployment URL</span>
+              </label>
+              <input
+                type="url"
+                name="deploymentUrl"
+                value={formData.deploymentUrl}
+                onChange={handleChange}
+                placeholder="https://..."
+                className="input input-bordered w-full"
+                required
+              />
+            </div>
           </div>
 
           <div className="form-control">
@@ -212,7 +214,7 @@ const AddProjectModal = ({ isOpen, onClose, onSuccess }) => {
               />
               <button
                 onClick={handleAddTechnology}
-                className="btn btn-primary"
+                className="btn btn-primary whitespace-nowrap"
                 type="button"
               >
                 Add
@@ -238,8 +240,7 @@ const AddProjectModal = ({ isOpen, onClose, onSuccess }) => {
           </div>
 
           <div className="form-control">
-            <label className="label cursor-pointer">
-              <span className="label-text">Featured Project</span>
+            <label className="label cursor-pointer justify-start gap-4">
               <input
                 type="checkbox"
                 name="featured"
@@ -247,21 +248,22 @@ const AddProjectModal = ({ isOpen, onClose, onSuccess }) => {
                 onChange={handleChange}
                 className="checkbox checkbox-primary"
               />
+              <span className="label-text">Featured Project</span>
             </label>
           </div>
 
-          <div className="pt-4 flex justify-end gap-2">
+          <div className="pt-4 flex flex-col-reverse sm:flex-row justify-end gap-2">
             <button
               type="button"
               onClick={onClose}
-              className="btn btn-ghost"
+              className="btn btn-ghost w-full sm:w-auto"
               disabled={loading}
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="btn btn-primary"
+              className="btn btn-primary w-full sm:w-auto"
               disabled={loading}
             >
               {loading ? (

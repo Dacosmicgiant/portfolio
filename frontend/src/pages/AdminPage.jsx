@@ -146,18 +146,18 @@ const AdminPage = () => {
                   className="card bg-base-200 shadow-xl"
                 >
                   <div className="card-body">
-                    <div className="flex items-start justify-between">
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
                       <div>
                         <h3 className="text-xl font-semibold">{message.name}</h3>
                         <a
                           href={`mailto:${message.email}`}
-                          className="text-primary hover:underline flex items-center gap-2"
+                          className="text-primary hover:underline flex items-center gap-2 text-sm sm:text-base"
                         >
                           <Mail size={16} />
                           {message.email}
                         </a>
                       </div>
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 self-end sm:self-start">
                         <div className="dropdown dropdown-end">
                           <div
                             tabIndex={0}
@@ -218,8 +218,8 @@ const AdminPage = () => {
                         </button>
                       </div>
                     </div>
-                    <p className="mt-4 whitespace-pre-wrap">{message.message}</p>
-                    <div className="text-sm text-base-content/50 mt-2">
+                    <p className="mt-4 whitespace-pre-wrap text-sm sm:text-base">{message.message}</p>
+                    <div className="text-xs sm:text-sm text-base-content/50 mt-2">
                       {new Date(message.createdAt).toLocaleString()}
                     </div>
                   </div>
