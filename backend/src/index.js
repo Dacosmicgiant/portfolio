@@ -43,7 +43,7 @@ app.use('/public', express.static(join(__dirname, '..', 'public')));
 app.use("/api/auth", authRoutes);
 app.use("/api/projects", projectRoutes);
 app.use("/api/messages", messageRoutes);
-
+app.use("/", "hello")
 app.listen(PORT, () => {
     console.log("server is running on PORT: "+ PORT);
     connectDB();
