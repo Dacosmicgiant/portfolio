@@ -9,7 +9,7 @@ dotenv.config(); // This loads the environment variables from the .env file
 
 const seedAdmin = async () => {
   try {
-    const mongoUri = process.env.MONGODB_URI;
+    const mongoUri = "mongodb+srv://vedantvanpro:3po27K1Gy4nSjqTn@cluster0.wi574.mongodb.net/portfolio_db?retryWrites=true&w=majority&appName=Cluster0";
     if (!mongoUri) {
       throw new Error("MONGODB_URI is not defined in the environment variables.");
     }
@@ -17,8 +17,8 @@ const seedAdmin = async () => {
     await mongoose.connect(mongoUri);
     console.log("Connected to MongoDB");
 
-    const email = "admin@example.com";
-    const password = "admin123";
+    const email = "vedantvanpro@gmail.com";
+    const password = "Omshiva@11";
 
     // Check if admin already exists
     const existingAdmin = await User.findOne({ email });

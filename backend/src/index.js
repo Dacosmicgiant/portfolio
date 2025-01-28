@@ -12,6 +12,7 @@ import {connectDB} from "./lib/db.js";
 
 import authRoutes from "./routes/auth.route.js";
 import projectRoutes from "./routes/project.route.js";
+import messageRoutes from "./routes/message.route.js";
 
 dotenv.config()
 const app = express();
@@ -41,6 +42,7 @@ app.use('/public', express.static(join(__dirname, '..', 'public')));
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/projects", projectRoutes);
+app.use("/api/messages", messageRoutes);
 
 app.listen(PORT, () => {
     console.log("server is running on PORT: "+ PORT);
