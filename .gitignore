@@ -27,7 +27,7 @@ public/assets/
 public/*.cache
 
 # Tailwind
-tailwind.config.js
+# tailwind.config.js
 
 # Ignore package-lock and yarn.lock if needed
 package-lock.json
