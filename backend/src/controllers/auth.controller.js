@@ -1,10 +1,12 @@
+// auth.controller.js
+
 import { generateToken } from "../lib/utils.js";
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
-import cloudinary from "../lib/cloudinary.js"
+// import cloudinary from "../lib/cloudinary.js"
 
 export const signup = async (req, res) => {
-    const { fullName, email, password } = req.body;
+    const { fullName, email, password, isAdmin=false } = req.body;
   try {
     if (!fullName || !email || !password) {
       return res.status(400).json({ message: "All fields are required" });
@@ -68,7 +70,8 @@ export const login = async (req, res) => {
         _id: user._id,
         fullName: user.fullName,
         email: user.email,
-        profilePic: user.profilePic,
+        // profilePic: user.profilePic,
+        isAdmin: user.isAdmin, // Include admin status
       });
     } catch (error) {
       console.log("Error in login controller", error.message);

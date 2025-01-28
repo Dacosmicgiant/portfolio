@@ -1,12 +1,16 @@
+// routes/message.route.js
 import express from "express";
-import { protectRoute } from "../middleware/auth.middleware.js";
-import { getMessages, getUsersForSidebar, sendMessage } from "../controllers/message.controller.js";
+import { sendMessage, getMessages, updateMessageStatus, deleteMessage } from "../controllers/message.controller.js";
+import { protectAdminRoute } from "../middleware/auth.middleware.js";
 
 const router = express.Router();
 
-router.get("/users", protectRoute, getUsersForSidebar);
-router.get("/:id", protectRoute, getMessages);
+// Public route to send a message
+router.post("/", sendMessage);
 
-router.post("/send/:id", protectRoute, sendMessage);
+// Admin routes
+router.get("/", protectAdminRoute, getMessages);
+router.patch("/:messageId/status", protectAdminRoute, updateMessageStatus);
+router.delete("/:messageId", protectAdminRoute, deleteMessage);
 
 export default router;

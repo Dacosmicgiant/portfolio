@@ -58,3 +58,5 @@ yarn.lock
 
 # Ignore git-related files
 *.orig
+
+/backend/src/seedAdmin.js
