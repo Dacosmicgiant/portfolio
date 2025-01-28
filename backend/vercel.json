@@ -2,26 +2,26 @@
     "version": 2,
     "builds": [
       {
-        "src": "backend/src/index.js",
+        "src": "/src/index.js",
         "use": "@vercel/node"
       }
     ],
     "routes": [
       {
         "src": "/api/auth/(.*)",
-        "dest": "backend/src/index.js"
+        "dest": "/src/index.js"
       },
       {
         "src": "/api/projects/(.*)",
-        "dest": "backend/src/index.js"
+        "dest": "/src/index.js"
       },
       {
         "src": "/api/messages/(.*)",
-        "dest": "backend/src/index.js"
+        "dest": "/src/index.js"
       },
       {
         "src": "/(.*)",
-        "dest": "frontend/index.html"
+        "dest": "/index.html"
       }
     ]
   }
