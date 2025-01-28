@@ -48,9 +48,6 @@ app.use('/public', express.static(join(__dirname, '..', 'public')));
 app.use("/api/auth", authRoutes);
 app.use("/api/projects", projectRoutes);
 app.use("/api/messages", messageRoutes);
-app.get("/", (req, res) => {
-    res.send("Welcome to the API!");
-});
 
 if(process.env.NODE_ENV==="production"){
     app.use(express.static(path.join(__dirname1, "../frontend/dist")));
