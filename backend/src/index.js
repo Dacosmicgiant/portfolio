@@ -6,6 +6,9 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+
+import path from "path";
+
 import fs from 'fs';
 
 import {connectDB} from "./lib/db.js";
@@ -27,6 +30,8 @@ if (!fs.existsSync(tempUploadDir)) {
     fs.mkdirSync(tempUploadDir, { recursive: true });
 }
 
+const __dirname1 = path.resolve();
+
 // Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -46,6 +51,14 @@ app.use("/api/messages", messageRoutes);
 app.get("/", (req, res) => {
     res.send("Welcome to the API!");
 });
+
+if(process.env.NODE_ENV==="production"){
+    app.use(express.static(path.join(__dirname1, "../frontend/dist")));
+
+    app.get("*", (req,res) => {
+        res.sendFile(path.join(__dirname1, "../frontend","dist", "index.html"));
+    })
+}
 
 app.listen(PORT, () => {
     console.log("server is running on PORT: "+ PORT);
