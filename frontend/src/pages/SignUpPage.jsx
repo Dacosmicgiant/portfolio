@@ -41,7 +41,7 @@ const SignUpPage = () => {
           <div className="min-h-[75vh] w-full max-w-4xl flex justify-center items-center p-6 sm:p-12">
             {/* Form Container */}
             <div className="w-full max-w-md space-y-8">
-              {/* LOGO */}
+              {/* LOGO 
               <div className="text-center mb-8">
                 <div className="flex flex-col items-center gap-2 group">
                   <div
@@ -54,6 +54,8 @@ const SignUpPage = () => {
                   <p className="text-base-content/60">Share your opinions!</p>
                 </div>
               </div>
+
+              */}
       
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Full Name Field */}
