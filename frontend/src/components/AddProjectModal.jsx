@@ -4,6 +4,7 @@ import { axiosInstance } from "../lib/axios";
 import toast from "react-hot-toast";
 
 const AddProjectModal = ({ isOpen, onClose, onSuccess }) => {
+  
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -109,6 +110,8 @@ const AddProjectModal = ({ isOpen, onClose, onSuccess }) => {
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-2 sm:p-4">
       <div className="bg-base-100 rounded-lg w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+        
+        {/* Heading */}
         <div className="sticky top-0 bg-base-100 p-3 sm:p-4 border-b border-base-300 flex justify-between items-center z-10">
           <h2 className="text-xl sm:text-2xl font-bold">Add New Project</h2>
           <button onClick={onClose} className="btn btn-ghost btn-sm">
@@ -116,6 +119,7 @@ const AddProjectModal = ({ isOpen, onClose, onSuccess }) => {
           </button>
         </div>
 
+        {/*project submit form */}
         <form onSubmit={handleSubmit} className="p-3 sm:p-4 space-y-4">
           <div className="form-control">
             <label className="label">
@@ -132,6 +136,7 @@ const AddProjectModal = ({ isOpen, onClose, onSuccess }) => {
             />
           </div>
 
+          {/* add description */}
           <div className="form-control">
             <label className="label">
               <span className="label-text">Description</span>
@@ -146,6 +151,7 @@ const AddProjectModal = ({ isOpen, onClose, onSuccess }) => {
             />
           </div>
 
+          {/* add display image */}
           <div className="form-control">
             <label className="label">
               <span className="label-text">Project Image</span>
@@ -168,6 +174,7 @@ const AddProjectModal = ({ isOpen, onClose, onSuccess }) => {
             )}
           </div>
 
+          {/* add github url */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="form-control">
               <label className="label">
@@ -183,7 +190,7 @@ const AddProjectModal = ({ isOpen, onClose, onSuccess }) => {
                 required
               />
             </div>
-
+            {/* add deployment url */}
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Deployment URL</span>
@@ -200,6 +207,7 @@ const AddProjectModal = ({ isOpen, onClose, onSuccess }) => {
             </div>
           </div>
 
+          {/* Technologies */}
           <div className="form-control">
             <label className="label">
               <span className="label-text">Technologies</span>
@@ -238,7 +246,8 @@ const AddProjectModal = ({ isOpen, onClose, onSuccess }) => {
               ))}
             </div>
           </div>
-
+            
+          {/* toggle is featured project? */}
           <div className="form-control">
             <label className="label cursor-pointer justify-start gap-4">
               <input
@@ -252,6 +261,7 @@ const AddProjectModal = ({ isOpen, onClose, onSuccess }) => {
             </label>
           </div>
 
+          {/* add project */}
           <div className="pt-4 flex flex-col-reverse sm:flex-row justify-end gap-2">
             <button
               type="button"
@@ -278,6 +288,7 @@ const AddProjectModal = ({ isOpen, onClose, onSuccess }) => {
           </div>
         </form>
       </div>
+
     </div>
   );
 };
