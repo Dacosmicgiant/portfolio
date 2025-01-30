@@ -18,6 +18,7 @@ import AdminPage from "./pages/AdminPage";
 
 import { useAuthStore } from "./store/useAuthStore";
 import { useThemeStore } from "./store/useThemeStore";
+import { usePageTracking } from './hooks/useAnalytics';
 
 const App = () => {
   const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
@@ -26,6 +27,8 @@ const App = () => {
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);
+
+  usePageTracking();
 
   if (isCheckingAuth && !authUser)
     return (

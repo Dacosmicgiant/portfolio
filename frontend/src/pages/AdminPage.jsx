@@ -4,6 +4,7 @@ import { axiosInstance } from "../lib/axios";
 import toast from "react-hot-toast";
 import { Loader, Plus, Trash2, Mail, CheckCircle, XCircle } from "lucide-react";
 import AddProjectModal from "../components/AddProjectModal";
+import { trackEvent } from '../lib/analytics';
 
 const AdminPage = () => {
   const [projects, setProjects] = useState([]);
@@ -38,8 +39,13 @@ const AdminPage = () => {
     try {
       await axiosInstance.delete(`/projects/${projectId}`);
       toast.success("Project deleted successfully");
+
+      trackEvent('admin_action', '/admin', 'project_delete', { projectId });
+
       fetchData();
     } catch (error) {
+
+      trackEvent('admin_error', '/admin', 'project_delete_error', { error: error.message });
       console.error("Error deleting project:", error);
       toast.error("Failed to delete project");
     }
@@ -49,8 +55,17 @@ const AdminPage = () => {
     try {
       await axiosInstance.patch(`/messages/${messageId}/status`, { status });
       toast.success("Message status updated");
+      trackEvent('admin_action', '/admin', 'message_status_update', {
+        messageId,
+        newStatus: status
+      });
       fetchData();
     } catch (error) {
+      trackEvent('admin_error', '/admin', 'message_status_update_error', {
+        messageId,
+        error: error.message
+      });
+
       console.error("Error updating message status:", error);
       toast.error("Failed to update message status");
     }
@@ -62,8 +77,13 @@ const AdminPage = () => {
     try {
       await axiosInstance.delete(`/messages/${messageId}`);
       toast.success("Message deleted successfully");
+      trackEvent('admin_action', '/admin', 'message_delete', { messageId });
       fetchData();
     } catch (error) {
+      trackEvent('admin_error', '/admin', 'message_delete_error', {
+        messageId,
+        error: error.message
+      });
       console.error("Error deleting message:", error);
       toast.error("Failed to delete message");
     }
@@ -85,7 +105,10 @@ const AdminPage = () => {
           <div className="flex justify-between items-center mb-8">
             <h1 className="text-4xl font-bold">Projects</h1>
             <button
-              onClick={() => setIsModalOpen(true)}
+              onClick={() => {
+                setIsModalOpen(true);
+                trackEvent('admin_action', '/admin', 'add_project_modal_open');
+              }}
               className="btn btn-primary"
             >
               <Plus size={20} />
@@ -177,8 +200,11 @@ const AdminPage = () => {
                           >
                             <li>
                               <button
-                                onClick={() =>
-                                  handleUpdateMessageStatus(message._id, "unread")
+                                onClick={() => {
+                                  handleUpdateMessageStatus(message._id, "unread");
+                                  trackEvent('admin_action', '/admin', 'mark_unread', { messageId: message._id });
+                                }
+
                                 }
                                 className="text-error"
                               >

@@ -17,6 +17,8 @@ import authRoutes from "./routes/auth.route.js";
 import projectRoutes from "./routes/project.route.js";
 import messageRoutes from "./routes/message.route.js";
 
+import analyticsRoute from './routes/analytics.route.js';
+
 dotenv.config()
 const app = express();
 
@@ -48,6 +50,10 @@ app.use('/public', express.static(join(__dirname, '..', 'public')));
 app.use("/api/auth", authRoutes);
 app.use("/api/projects", projectRoutes);
 app.use("/api/messages", messageRoutes);
+
+app.use('/api/analytics', analyticsRoute);
+
+
 
 if(process.env.NODE_ENV==="production"){
     app.use(express.static(path.join(__dirname1, "../frontend/dist")));
