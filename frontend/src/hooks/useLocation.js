@@ -1,10 +1,9 @@
-// frontend/src/hooks/useLocation.js
 import { useState, useEffect } from 'react';
 
 export const useLocation = () => {
   const [location, setLocation] = useState(null);
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const requestLocation = () => {
     if (!navigator.geolocation) {
@@ -12,6 +11,8 @@ export const useLocation = () => {
       setLoading(false);
       return;
     }
+
+    setLoading(true);  // Set loading to true when requesting location
 
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -21,8 +22,8 @@ export const useLocation = () => {
         });
         setLoading(false);
       },
-      (error) => {
-        setError(error.message);
+      (err) => {
+        setError(err.message);
         setLoading(false);
       },
       {
@@ -32,6 +33,11 @@ export const useLocation = () => {
       }
     );
   };
+
+  // Optionally, you can use useEffect to automatically request location when component mounts
+  // useEffect(() => {
+  //   requestLocation();
+  // }, []);
 
   return { location, error, loading, requestLocation };
 };
