@@ -1,9 +1,10 @@
 // frontend/src/lib/analytics.js
-import axios from './axios.js';
+import { axiosInstance } from './axios.js';
+
 
 export const trackEvent = async (eventType, page, element) => {
   try {
-    await axios.post('/api/analytics/track', {
+    await axiosInstance.post('/analytics/track', {
       eventType,
       page,
       element

@@ -6,6 +6,10 @@ import { Loader, Plus, Trash2, Mail, CheckCircle, XCircle } from "lucide-react";
 import AddProjectModal from "../components/AddProjectModal";
 import { trackEvent } from '../lib/analytics';
 
+
+import AnalyticsDashboard from '../components/AnalyticsDashboard';
+
+
 const AdminPage = () => {
   const [projects, setProjects] = useState([]);
   const [messages, setMessages] = useState([]);
@@ -100,6 +104,8 @@ const AdminPage = () => {
   return (
     <div className="min-h-screen bg-base-100 pt-16">
       <div className="container mx-auto px-4 py-10">
+
+        <AnalyticsDashboard />
         {/* Projects Section */}
         <div className="mb-16">
           <div className="flex justify-between items-center mb-8">
