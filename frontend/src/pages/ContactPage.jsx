@@ -1,9 +1,6 @@
-// ContactPage.jsx
 import React, { useState } from "react";
 import { Send, Loader } from "lucide-react";
-import { axiosInstance } from "../lib/axios";
 import toast from "react-hot-toast";
-
 import { trackEvent } from '../lib/analytics';
 
 const ContactPage = () => {
@@ -26,13 +23,23 @@ const ContactPage = () => {
     e.preventDefault();
     setLoading(true);
     trackEvent('form_start', '/contact', 'contact_form');
-
+  
+    const data = new FormData();
+    data.append('name', formData.name);
+    data.append('email', formData.email);
+    data.append('message', formData.message);
+  
     try {
-      const response = await axiosInstance.post("/messages", formData);
-      console.log("Message sent:", response.data);
+      const response = await fetch("https://formspree.io/f/mvgzrgqe", {
+        method: "POST",
+        body: data,
+        mode: 'no-cors',  // Disable CORS for the redirect
+      });
+  
+      // Since we're using 'no-cors', the response can't be accessed directly
       toast.success("Message sent successfully!");
       trackEvent('form_success', '/contact', 'contact_form');
-      
+  
       // Clear form
       setFormData({
         name: "",
@@ -40,8 +47,8 @@ const ContactPage = () => {
         message: "",
       });
     } catch (error) {
-      console.error("Error sending message:", error);
-      toast.error(error.response?.data?.message || "Failed to send message");
+      console.error("Error sending email:", error);
+      toast.error("Failed to send message");
       trackEvent('form_error', '/contact', 'contact_form', {
         error: error.message
       });
@@ -49,11 +56,7 @@ const ContactPage = () => {
       setLoading(false);
     }
   };
-
-   // Add input interaction tracking
-   const handleTrackInput = (fieldName) => {
-    trackEvent('form_interaction', '/contact', `contact_${fieldName}_input`);
-  };
+  
 
   return (
     <div className="min-h-screen bg-base-100 pt-16">
@@ -64,7 +67,12 @@ const ContactPage = () => {
             Have a question or want to work together? Feel free to reach out!
           </p>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form
+            onSubmit={handleSubmit}
+            action="https://formspree.io/f/mvgzrgqe"
+            method="POST"
+            className="space-y-6"
+          >
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Name</span>
@@ -74,7 +82,6 @@ const ContactPage = () => {
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                onFocus={() => handleTrackInput('name')}
                 placeholder="Your name"
                 className="input input-bordered w-full"
                 required
@@ -90,7 +97,6 @@ const ContactPage = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                onFocus={() => handleTrackInput('email')}
                 placeholder="your.email@example.com"
                 className="input input-bordered w-full"
                 required
@@ -103,7 +109,6 @@ const ContactPage = () => {
               </label>
               <textarea
                 name="message"
-                onFocus={() => handleTrackInput('message')}
                 value={formData.message}
                 onChange={handleChange}
                 placeholder="Your message"
@@ -120,11 +125,9 @@ const ContactPage = () => {
               {loading ? (
                 <Loader className="animate-spin" />
               ) : (
-                <>
-                  <Send size={20} />
-                  Send Message
-                </>
+                <Send size={20} />
               )}
+              Send Message
             </button>
           </form>
         </div>
