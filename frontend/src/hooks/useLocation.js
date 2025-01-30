@@ -16,10 +16,15 @@ export const useLocation = () => {
 
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        setLocation({
+        const newLocation = {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude
-        });
+        };
+
+        // Save the location to localStorage
+        localStorage.setItem('location', JSON.stringify(newLocation));
+
+        setLocation(newLocation);
         setLoading(false);
       },
       (err) => {
@@ -34,10 +39,18 @@ export const useLocation = () => {
     );
   };
 
-  // Optionally, you can use useEffect to automatically request location when component mounts
-  // useEffect(() => {
-  //   requestLocation();
-  // }, []);
+  useEffect(() => {
+    // Check if location is already stored in localStorage
+    const storedLocation = localStorage.getItem('location');
+
+    if (storedLocation) {
+      // If location is stored, use it directly
+      setLocation(JSON.parse(storedLocation));
+    } else {
+      // If location is not stored, request it
+      requestLocation();
+    }
+  }, []);
 
   return { location, error, loading, requestLocation };
 };
