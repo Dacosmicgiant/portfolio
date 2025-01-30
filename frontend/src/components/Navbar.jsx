@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Link, useLocation } from "react-router-dom";
 import { useAuthStore } from "../store/useAuthStore";
 import { LogOut, Settings, User, Menu, X } from "lucide-react";
+import { trackEvent } from '../lib/analytics';
 
 const Navbar = () => {
   const { logout, authUser } = useAuthStore();
@@ -14,6 +15,21 @@ const Navbar = () => {
 
   const isActive = (path) => {
     return location.pathname === path ? "bg-base-200" : "";
+  };
+
+  const trackNavigation = (path, element) => {
+    trackEvent('navigation', path, element);
+  };
+
+  const handleLogout = () => {
+    trackEvent('auth', '/', 'logout');
+    logout();
+  };
+
+  const toggleMenu = () => {
+    const action = isOpen ? 'close' : 'open';
+    trackEvent('menu_interaction', window.location.pathname, `mobile_menu_${action}`);
+    setIsOpen(!isOpen);
   };
 
   return (
@@ -28,11 +44,26 @@ const Navbar = () => {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-4">
-            <Link to="/" className={`btn btn-ghost btn-sm ${isActive("/")}`}>About</Link>
-            <Link to="/projects" className={`btn btn-ghost btn-sm ${isActive("/projects")}`}>Projects</Link>
-            <Link to="/contact" className={`btn btn-ghost btn-sm ${isActive("/contact")}`}>Contact</Link>
+            <Link to="/" 
+
+            onClick={() => trackNavigation('/', 'desktop_about_link')}
             
-            <Link to="/theme" className="btn btn-sm gap-2 transition-colors">
+            className={`btn btn-ghost btn-sm ${isActive("/")}`}>About</Link>
+            <Link to="/projects"
+
+            onClick={() => trackNavigation('/projects', 'desktop_projects_link')} 
+
+            className={`btn btn-ghost btn-sm ${isActive("/projects")}`}>Projects</Link>
+
+            <Link to="/contact"
+
+            onClick={() => trackNavigation('/contact', 'desktop_contact_link')}
+
+            className={`btn btn-ghost btn-sm ${isActive("/contact")}`}>Contact</Link>
+            
+            <Link to="/theme" 
+            onClick={() => trackEvent('theme_interaction', '/theme', 'desktop_theme_button')}
+            className="btn btn-sm gap-2 transition-colors">
               <Settings className="w-4 h-4" />
               <span>Theme</span>
             </Link>
@@ -40,7 +71,9 @@ const Navbar = () => {
             {authUser ? (
               <>
                 {authUser.isAdmin && (
-                  <Link to="/admin" className={`btn btn-ghost btn-sm gap-2 ${isActive("/admin")}`}>
+                  <Link to="/admin" 
+                  onClick={() => trackEvent('admin_navigation', '/admin', 'desktop_admin_link')}
+                  className={`btn btn-ghost btn-sm gap-2 ${isActive("/admin")}`}>
                     Admin Panel
                   </Link>
                 )}
@@ -50,7 +83,9 @@ const Navbar = () => {
                 </button>
               </>
             ) : (
-              <Link to="/login" className={`btn btn-sm gap-2 ${isActive("/login")}`}>
+              <Link to="/login" 
+              onClick={() => trackEvent('auth', '/login', 'desktop_login_button')}
+              className={`btn btn-sm gap-2 ${isActive("/login")}`}>
                 <User className="size-4" />
                 <span>Login</span>
               </Link>
@@ -82,8 +117,12 @@ const Navbar = () => {
             </Link>
             <Link
               to="/projects"
+              onClick={() => {
+                trackNavigation('/projects', 'mobile_projects_link');
+                closeMenu();
+              }}
               className={`btn btn-ghost btn-sm justify-start ${isActive("/projects")}`}
-              onClick={closeMenu}
+              
             >
               Projects
             </Link>

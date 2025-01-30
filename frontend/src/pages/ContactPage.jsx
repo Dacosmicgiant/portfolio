@@ -4,6 +4,8 @@ import { Send, Loader } from "lucide-react";
 import { axiosInstance } from "../lib/axios";
 import toast from "react-hot-toast";
 
+import { trackEvent } from '../lib/analytics';
+
 const ContactPage = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -23,11 +25,13 @@ const ContactPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    trackEvent('form_start', '/contact', 'contact_form');
 
     try {
       const response = await axiosInstance.post("/messages", formData);
       console.log("Message sent:", response.data);
       toast.success("Message sent successfully!");
+      trackEvent('form_success', '/contact', 'contact_form');
       
       // Clear form
       setFormData({
@@ -38,9 +42,17 @@ const ContactPage = () => {
     } catch (error) {
       console.error("Error sending message:", error);
       toast.error(error.response?.data?.message || "Failed to send message");
+      trackEvent('form_error', '/contact', 'contact_form', {
+        error: error.message
+      });
     } finally {
       setLoading(false);
     }
+  };
+
+   // Add input interaction tracking
+   const handleTrackInput = (fieldName) => {
+    trackEvent('form_interaction', '/contact', `contact_${fieldName}_input`);
   };
 
   return (
@@ -62,6 +74,7 @@ const ContactPage = () => {
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
+                onFocus={() => handleTrackInput('name')}
                 placeholder="Your name"
                 className="input input-bordered w-full"
                 required
@@ -77,6 +90,7 @@ const ContactPage = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
+                onFocus={() => handleTrackInput('email')}
                 placeholder="your.email@example.com"
                 className="input input-bordered w-full"
                 required
@@ -89,6 +103,7 @@ const ContactPage = () => {
               </label>
               <textarea
                 name="message"
+                onFocus={() => handleTrackInput('message')}
                 value={formData.message}
                 onChange={handleChange}
                 placeholder="Your message"
