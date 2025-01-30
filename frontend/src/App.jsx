@@ -20,9 +20,21 @@ import { useAuthStore } from "./store/useAuthStore";
 import { useThemeStore } from "./store/useThemeStore";
 import { usePageTracking } from './hooks/useAnalytics';
 
+import React, { useState } from 'react';
+
+import LocationPrompt from './components/LocationPrompt';
+import { trackEvent } from './lib/analytics';
+
 const App = () => {
   const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
   const { theme } = useThemeStore();
+  const [userLocation, setUserLocation] = useState(null);
+
+  const handleLocationUpdate = (location) => {
+    setUserLocation(location);
+    // Update all future analytics calls with the location
+    localStorage.setItem('userLocation', JSON.stringify(location));
+  };
 
   useEffect(() => {
     checkAuth();
@@ -39,6 +51,7 @@ const App = () => {
 
   return (
     <div data-theme={theme}>
+      <LocationPrompt onLocationUpdate={handleLocationUpdate} />
       <Navbar />
 
       <Routes>

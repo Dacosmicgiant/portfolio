@@ -1,26 +1,41 @@
 // backend/src/controllers/analytics.controller.js
-import Analytics from '../models/analytics.model.js';
+import { Analytics } from '../models/analytics.model.js';
 
 import geoip from 'geoip-lite';
 
+// backend/src/controllers/analytics.controller.js
 export const trackEvent = async (req, res) => {
     try {
-      const { eventType, page, element } = req.body;
-      const ip = req.ip.replace('::ffff:', ''); // Remove IPv6 prefix if present
-      const geo = geoip.lookup(ip);
+      const { eventType, page, element, latitude, longitude } = req.body;
+      let locationData = {};
+      
+      if (latitude && longitude) {
+        // Use the provided coordinates
+        locationData = {
+          latitude,
+          longitude,
+          source: 'browser'
+        };
+      } else {
+        // Fallback to IP-based location
+        const ip = req.ip.replace('::ffff:', '');
+        const geo = geoip.lookup(ip);
+        locationData = {
+          country: geo?.country || 'Unknown',
+          region: geo?.region || 'Unknown',
+          city: geo?.city || 'Unknown',
+          source: 'ip'
+        };
+      }
       
       const analyticsEntry = new Analytics({
         userId: req.user?._id,
         eventType,
         page,
         element,
-        ipAddress: ip,
+        ipAddress: req.ip,
         userAgent: req.headers['user-agent'],
-        location: {
-          country: geo?.country || 'Unknown',
-          region: geo?.region || 'Unknown',
-          city: geo?.city || 'Unknown'
-        }
+        location: locationData
       });
   
       await analyticsEntry.save();

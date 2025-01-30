@@ -1,19 +1,23 @@
 // backend/src/models/analytics.model.js
-import mongoose from 'mongoose';
+
+import mongoose from 'mongoose';  // Add this line to import mongoose
 
 const analyticsSchema = new mongoose.Schema({
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  eventType: { type: String, required: true },
-  page: String,
-  element: String,
-  ipAddress: String,
-  userAgent: String,
-  location: {
-    country: String,
-    region: String,
-    city: String
-  },
-  timestamp: { type: Date, default: Date.now }
-});
+    // ... existing fields ...
+    location: {
+      country: String,
+      region: String,
+      city: String,
+      latitude: Number,
+      longitude: Number,
+      source: {
+        type: String,
+        enum: ['ip', 'browser', 'manual'],
+        default: 'ip'
+      }
+    }
+  });
 
-export default mongoose.model('Analytics', analyticsSchema);
+  const Analytics = mongoose.model('Analytics', analyticsSchema);
+
+export { Analytics };  // Named export
