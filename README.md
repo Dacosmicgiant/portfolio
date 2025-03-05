@@ -8,7 +8,7 @@ Here's a breakdown of the project's directory structure to help you navigate and
 
 <details>
   <summary>Click to expand directory structure</summary>
-  '''markdown
+  <pre>
   └── dacosmicgiant-portfolio/ 🚀 // Root project directory \n
   ├── 📜 README.md             // Root README file - You are here!
   ├── 📦 package.json          // Root package.json for build and start scripts
@@ -88,7 +88,7 @@ Here's a breakdown of the project's directory structure to help you navigate and
   └── 🗄️ store/            // Zustand store for state management - Application state
   ├── 🔑 useAuthStore.js // Authentication state management
   └── 🎨 useThemeStore.js // Theme state management
-  '''
+  </pre>
   </details>
 
   ## 🛠️ Technologies Used
