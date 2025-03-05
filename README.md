@@ -118,7 +118,7 @@ Built to be interactive and visually engaging, the frontend utilizes these techn
 
 The backend is engineered for performance and scalability, utilizing these technologies:
 
-*   **<0xF0><0x9F><0x90><0xB1> Node.js:**  An asynchronous event-driven JavaScript runtime, ideal for building scalable network applications.
+*   **Node.js:**  An asynchronous event-driven JavaScript runtime, ideal for building scalable network applications.
 *   **🕸️ Express.js:**  A fast, unopinionated, minimalist web framework for Node.js, simplifying server and API creation.
 *   **🌿 MongoDB:**  A flexible and scalable NoSQL database, perfect for modern web applications.
 *   **🍃 Mongoose:**  An elegant MongoDB object modeling for Node.js, providing schema validation and more.
