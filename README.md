@@ -9,7 +9,7 @@ Here's a breakdown of the project's directory structure to help you navigate and
 <details>
   <summary>Click to expand directory structure</summary>
   '''markdown
-  └── dacosmicgiant-portfolio/ 🚀 // Root project directory
+  └── dacosmicgiant-portfolio/ 🚀 // Root project directory \n
   ├── 📜 README.md             // Root README file - You are here!
   ├── 📦 package.json          // Root package.json for build and start scripts
   ├── ⚙️ backend/              // Backend directory - Server-side logic
