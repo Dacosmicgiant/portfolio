@@ -48,15 +48,15 @@ const ContactPage = () => {
       icon: Mail,
       title: "Email",
       description: "Drop me a line anytime",
-      value: "vedant.vankar@example.com",
+      value: "vedantvanpro@gmail.com",
       color: "primary",
-      href: "mailto:vedant.vankar@example.com"
+      href: "mailto:vedantvanpro@gmail.com"
     },
     {
       icon: Phone,
       title: "Phone",
       description: "Call for immediate response",
-      value: "+91 98765 43210",
+      value: "+91 8828279331",
       color: "secondary",
       href: "tel:+919876543210"
     },
