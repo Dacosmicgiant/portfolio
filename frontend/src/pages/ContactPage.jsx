@@ -292,11 +292,11 @@ const ContactPage = () => {
                 Every great project starts with a conversation. Let's discuss your ideas and create something remarkable together.
               </p>
               <div className="flex flex-wrap justify-center gap-4">
-                <a href="mailto:vedant.vankar@example.com" className="btn btn-primary gap-2">
+                <a href="mailto:vedantvanpro@gmail.com" className="btn btn-primary gap-2">
                   <Mail size={20} />
                   Email Me
                 </a>
-                <a href="tel:+919876543210" className="btn btn-secondary gap-2">
+                <a href="tel:+918828279331" className="btn btn-secondary gap-2">
                   <Phone size={20} />
                   Call Me
                 </a>
